@@ -27,6 +27,12 @@ class TestProfiles(unittest.TestCase):
          test_profiles.save_profiles()
          self.new_profiles.delete_profiles()
          self.assertEqual(len(Profiles.profiles_list),1)
+     def test_find_profiles_by_username(self):
+         self.new_profiles.save_profiles()
+         test_profiles = Profiles("tinakathambi","tina13@gmail.com","skrrr")
+         test_profiles.save_profiles()
+         found_profiles = Profiles.find_by_username("tinakathambi")
+         self.assertEqual(found_profiles.username,test_profiles.username)
 
 if __name__ == '__main__':
     unittest.main()
