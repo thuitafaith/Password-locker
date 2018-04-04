@@ -1,4 +1,5 @@
 import random,string
+import pyperclip
 class Profiles:
     '''
     create instances of class Profiles
@@ -31,6 +32,14 @@ class Profiles:
             strp= string.ascii_uppercase + string.ascii_lowercase + string.digits
             password_generated = "".join(random.choice(strp) for i in range(password))
             username_found.password = password_generated
+            return True
+        else:
+            return False
+    @classmethod
+    def copy_password(cls,username):
+        found_profile = Profiles.find_by_username(username)
+        if found_profile:
+            pyperclip.copy(found_profile.password)
             return True
         else:
             return False

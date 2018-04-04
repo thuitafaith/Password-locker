@@ -50,9 +50,11 @@ class TestProfiles(unittest.TestCase):
          password_changed = test_profiles.generate_password("thuitafaith",8)
          self.assertTrue(len(test_profiles.password),8)
      def test_copy_password(self):
-         self.new_profiles.save_profiles()
-         Profiles.copy_password("prrr")
-         self.assertEqual(self.new_profiles.password,pyperclip.paste())
+         test_profiles = Profiles("thuitafaith","thuita12@gmail.com","prrr")
+         test_profiles.save_profiles()
+         test_profiles.generate_password("thuitafaith",9)
+         Profiles.copy_password("thuitafaith")
+         self.assertEqual(test_profiles.password,pyperclip.paste())
 
 if __name__ == '__main__':
     unittest.main()
