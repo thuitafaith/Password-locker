@@ -13,6 +13,14 @@ class TestProfiles(unittest.TestCase):
      def test_save_profiles(self):
          self.new_profiles.save_profiles() #saving the new profile
          self.assertEqual(len(Profiles.profiles_list),1)
+     def tearDown(self):
+         Profiles.profiles_list = []
+
+     def test_save_multiple_profiles(self):
+         self.new_profiles.save_profiles()
+         test_profiles = Profiles("tinakathambi","tina13@gmail.com","skrrr") # new profile
+         test_profiles.save_profiles()
+         self.assertEqual(len(Profiles.profiles_list),2)
 
 if __name__ == '__main__':
     unittest.main()
