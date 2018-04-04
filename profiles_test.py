@@ -10,6 +10,9 @@ class TestProfiles(unittest.TestCase):
          self.assertEqual(self.new_profiles.username,"thuitafaith")
          self.assertEqual(self.new_profiles.email,"thuita12@gmail.com")
          self.assertEqual(self.new_profiles.password,"prrr")
+     def test_save_profiles(self):
+         self.new_profiles.save_profiles() #saving the new profile
+         self.assertEqual(len(Profiles.profiles_list),1)
 
 if __name__ == '__main__':
     unittest.main()
