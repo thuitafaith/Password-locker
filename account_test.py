@@ -57,6 +57,7 @@ class TestAccount(unittest.TestCase):
          account_exists = test2_account.account_exist("kamau@gmail.com")
 
          self.assertTrue(account_exists)
-         
+     def test_display_all_accounts(self):
+         self.assertEqual(Account.display_accounts(),Account.account_list)
 if __name__ == '__main__':
     unittest.main()

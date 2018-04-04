@@ -23,6 +23,9 @@ class Account:
                 return True
             else:
                 return False
+    @classmethod
+    def display_accounts(cls):
+        return cls.account_list
     def __init__(self,first_name,last_name,email,password):
 
         self.first_name = first_name
