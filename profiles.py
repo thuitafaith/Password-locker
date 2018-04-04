@@ -23,6 +23,18 @@ class Profiles:
     @classmethod
     def display_profiles(cls):
         return cls.profiles_list
+    @classmethod
+    def generate_password(cls,username,password=6):
+        username_found = Profiles.find_by_username(username)
+        if username_found:
+            str= string.ascci_uppercase + string.ascii_lowercase + string.digits
+            password_generated = "".join(random.choice(str) for i in range(password))
+            username_found.password = password_generated
+            return True
+        else:
+            return False
+
+
     def __init__(self,username,email,password = None):
 
         self.username = username
