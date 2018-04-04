@@ -1,5 +1,6 @@
 import unittest #Importing the unittest module
 from profiles import Profiles # importing profiles class
+import pyperclip
 
 class TestProfiles(unittest.TestCase):
 
@@ -43,5 +44,11 @@ class TestProfiles(unittest.TestCase):
          self.assertTrue(profiles_exists)
      def test_display_all_profiles(self):
          self.assertEqual(Profiles.display_profiles(),Profiles.profiles_list)
+     def test_generate_password(self):
+         test_profiles = Profiles("thuitafaith","thuita12@gmail.com","prrr")
+         test_profiles.save_profiles()
+         password_changed = test_profiles.generate_password("8")
+         self.assertTrue(len(password_changed.password),8)
+
 if __name__ == '__main__':
     unittest.main()
