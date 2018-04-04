@@ -33,6 +33,14 @@ class TestProfiles(unittest.TestCase):
          test_profiles.save_profiles()
          found_profiles = Profiles.find_by_username("tinakathambi")
          self.assertEqual(found_profiles.username,test_profiles.username)
+     def tearDown(self):
+         Profiles.profiles_list = []
+     def test_profiles_exists(self):
+         self.new_profiles.save_profiles()
+         test_profiles = Profiles("thuitafaith","thuita12@gmail.com","prrr")
+         test_profiles.save_profiles()
+         profiles_exists = Profiles.profiles_exist("thuitafaith")
+         self.assertTrue(profiles_exists)
 
 if __name__ == '__main__':
     unittest.main()

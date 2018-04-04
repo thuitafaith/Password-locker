@@ -13,6 +13,13 @@ class Profiles:
         for profiles in cls.profiles_list:
             if profiles.username == username:
                 return profiles
+    @classmethod
+    def profiles_exist(cls,username):
+        for profiles in cls.profiles_list:
+            if profiles.username == username:
+                return True
+            else:
+                return False
     def __init__(self,username,email,password = None):
 
         self.username = username
