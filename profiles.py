@@ -1,3 +1,4 @@
+import random,string
 class Profiles:
     '''
     create instances of class Profiles
@@ -27,8 +28,8 @@ class Profiles:
     def generate_password(cls,username,password=6):
         username_found = Profiles.find_by_username(username)
         if username_found:
-            str= string.ascci_uppercase + string.ascii_lowercase + string.digits
-            password_generated = "".join(random.choice(str) for i in range(password))
+            strp= string.ascii_uppercase + string.ascii_lowercase + string.digits
+            password_generated = "".join(random.choice(strp) for i in range(password))
             username_found.password = password_generated
             return True
         else:
