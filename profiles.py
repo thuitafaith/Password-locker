@@ -20,6 +20,9 @@ class Profiles:
                 return True
             else:
                 return False
+    @classmethod
+    def display_profiles(cls):
+        return cls.profiles_list
     def __init__(self,username,email,password = None):
 
         self.username = username

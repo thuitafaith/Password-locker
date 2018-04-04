@@ -41,6 +41,7 @@ class TestProfiles(unittest.TestCase):
          test_profiles.save_profiles()
          profiles_exists = Profiles.profiles_exist("thuitafaith")
          self.assertTrue(profiles_exists)
-
+     def test_display_all_profiles(self):
+         self.assertEqual(Profiles.display_profiles(),Profiles.profiles_list)
 if __name__ == '__main__':
     unittest.main()
