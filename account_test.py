@@ -50,6 +50,11 @@ class TestAccount(unittest.TestCase):
          test_account.save_account()
          found_account = Account.find_by_email("mwangi12@gmail.com")
          self.assertEqual(found_account.email,test_account.email)
+     def test_user_login(self):
+         test_account = Account("mwangi","njuguna","mwangi12@gmail.com","press")
+         test_account.save_account()
+         user_login = Account.user_login("mwangi12@gmail.com","press")
+         self.assertTrue(user_login)
      def test_account_exists(self):
          test2_account = Account("mwangi","njuguna","kamau@gmail.com","press")
          test2_account.save_account()
