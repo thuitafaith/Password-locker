@@ -34,30 +34,54 @@ def generate_password(password):
 
 def Profile_():
     while True:
-        print("Use these short codes: ca - create an account, da- display account, fa- find an account, ex- exit the account")
+        print("Use these short codes: cp - create profile, dp- display profile, fp- find a profile, ex- exit the profile")
 
         short_code = input().lower()
 
         if short_code == 'ca':
             print("New Profiles")
 
-            print("First name")
-            f_name = input()
+            print("Enter profile name")
+            profile_name = input()
 
-            print("Last name")
-            l_name = input()
-
-            print("email")
+            print("Enter your email")
             email = input()
 
             print("Enter your password")
             password = input()
-            save_accounts(create_account(f_name,l_name,email,password)) #create and save new account
+
+            save_profiles(create_profile(profile_name,email,password)) #create and save new account
             print('\n')
-            print(f"New Account {f_name} {l_name} created")
+            print(f"New Profile {profile_name} {email} {password} created")
 
             print('\n')
-            #elif short_code == 'da':
+        elif short_code == 'dp':
+            if display_profiles():
+                print("Here is your profile")
+                print('\n')
+                for profile in display_profiles():
+                    print(f"{profile.profile_name} {profile.email} {profile.password}")
+            else:
+                print('\n')
+                print("There is no such profile")
+        elif short_code == 'fp':
+            if find_profiles_by_username():
+                print("Enter the user name for the profile you want to look for")
+                search_username = input()
+
+                if checking_existing_profiles(search_username)
+                print(f"{search_username}")
+            else:
+                print("Profile not found")
+
+
+
+        elif short_code == 'ex':
+            print("Nice time")
+        else:
+            print("Try again")
+
+
 
 
 
