@@ -34,7 +34,7 @@ def main():
         print("Hello, welcome to the password locker. Please enter your name")
 
         user_namep = input()
-        print(f"Hello {user_namep}. do you have an account? if yes login, if no sign up"yes/no)
+        print(f"Hello {user_namep}. do you have an account? if yes login, if no sign up?yes/no")
 
         print('\n')
         user_prompt = input().lower()
@@ -47,6 +47,19 @@ def main():
             email = input()
             print("Enter a password")
             password = input()
+            if first_name == ""or last_name == "" or email == "" or password == "":
+                print("Error!you submitted empty field(s)")
+            else:
+                new_account = create_account(first_name,last_name,email,password)
+                save_account(new_account)
+
+        elif user_prompt == "yes":
+            print("Enter your email")
+            user_email = input()
+            print("Enter your password")
+            user_password = input()
+        else:
+            print("What are you doing")
 
 
 
