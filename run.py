@@ -18,28 +18,32 @@ def user_login(email,password):
     return Account.user_login(email,password)
 
 #Functions for the profiles class
-def save_profiles(username,email,password):
+def create_profile(fname,lname,password):
+    new_account = Profiles(fname,lname,password)
+    return new_account
+def save_profiles(profiles):
     profiles.save_profiles()
 def delete_profiles(profiles):
     profiles.delete_profiles()
 def find_profiles_by_username(username):
-    return profiles.find_profiles_by_username(username)
+    return Profiles.find_by_username(username)
 def checking_existing_profiles(username):
     return Profiles.profiles_exist(username)
 def display_profiles():
     return Profiles.display_profiles()
-def generate_password(password):
-    return Profiles.generate_password()
-
+def generate_password(username,password):
+    return Profiles.generate_password(username,password)
+def copy_profile_password(username):
+    return Profiles.copy_password(username)
 
 def Profile_():
     while True:
-        print("Use these short codes: cp - create profile, dp- display profile, fp- find a profile, ex- exit the profile")
+        print("Use these short codes: cp - create profile, dp- display profile, fp- find a profile,gp-generate password, ex- exit the profile")
 
         short_code = input().lower()
 
-        if short_code == 'ca':
-            print("New Profiles")
+        if short_code == 'cp':
+            print("\t\t New Profiles")
 
             print("Enter profile name")
             profile_name = input()
@@ -50,50 +54,94 @@ def Profile_():
             print("Enter your password")
             password = input()
 
-            save_profiles(create_profile(profile_name,email,password)) #create and save new account
-            print('\n')
-            print(f"New Profile {profile_name} {email} {password} created")
+            if profile_name == "" or email == "" or password == "":
+                print("You can not submit empty fields")
 
-            print('\n')
+
+            else:
+                if checking_existing_profiles(profile_name):
+                    print("Profile already exists")
+                else:
+                    n_prof = create_profile(profile_name,email,password)
+                    save_profiles(n_prof) #create and save new account
+                    print('\n')
+                    print(f"New Profile {profile_name} {email} {password} created")
+                    print('\n')
         elif short_code == 'dp':
             if display_profiles():
                 print("Here is your profile")
                 print('\n')
                 for profile in display_profiles():
-                    print(f"{profile.profile_name} {profile.email} {profile.password}")
+                    print(f"PROFILE NAME : {profile.username} \n PROFILE EMAIL: {profile.email} \n PROFILE PASSWORD: {profile.password}")
             else:
                 print('\n')
-                print("There is no such profile")
+                print("There is no profile available")
         elif short_code == 'fp':
-            if find_profiles_by_username():
-                print("Enter the user name for the profile you want to look for")
-                search_username = input()
-
-                if checking_existing_profiles(search_username)
+            print("Enter the user name for the profile you want to look for")
+            search_username = input()
+            profile_found = checking_existing_profiles(search_username)
+            if profile_found:
+                user_find = find_profiles_by_username(search_username)
+                print(f"PROFILE NAME : {user_find.username} \n PROFILE EMAIL: {user_find.email} \n PROFILE PASSWORD: {user_find.password}")
                 print(f"{search_username}")
             else:
+                print("\n")
                 print("Profile not found")
+                print("\n")
 
+        elif short_code == 'gp':
+            print("Enter the username for which you want to change password")
+            username_change_pass = input()
+            print("Enter the length of the password you want")
+            password_length = input()
+            if username_change_pass == "" or password_length=="":
+                print("You cannot submit an empty field(s)")
+            else:
+                profile_found = checking_existing_profiles(username_change_pass)
+                if not profile_found:
+                    print("No profile found")
+                else:
+                    try:
+                        password_len = int(password_length)
+                        if password_length.isdigit():
+                            generate_password(username_change_pass,password_len)
+                        else:
+                            print("Negative numbers not allowed")
+                    except ValueError:
+                        print("Only numbers are allowed")
 
+        elif short_code == "copy":
+            print("Enter the username of the profile you want to copy the password")
+            copy_username = input()
+            if copy_username=="":
+                print("You must enter a profile name")
+            else:
+                profile_found = checking_existing_profiles(copy_username)
+                if not profile_found:
+                    print("No profile found")
+                else:
+                    if copy_profile_password(copy_username):
+                        print("Password Copied!")
 
         elif short_code == 'ex':
-            print("Nice time")
+            break
         else:
-            print("Try again")
+            print("Unrecognised command!Try again")
 
 
 
 
 
 def main():
+    print("Hello, welcome to the password locker. Please enter your name")
+    user_namep = input()
     while True:
-        print("Hello, welcome to the password locker. Please enter your name")
 
-        user_namep = input()
+
         print(f"Hello {user_namep}. do you have an account? if yes login, if no sign up?yes/no")
 
 
-        user_prompt = input().lower()
+        user_prompt = input().lower().replace(" ","")
         if user_prompt == "no":
             print("Enter your first name")
             first_name = input()
