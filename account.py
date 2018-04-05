@@ -26,6 +26,13 @@ class Account:
     @classmethod
     def display_accounts(cls):
         return cls.account_list
+    @classmethod
+    def user_login(cls,email,password):
+        for account in cls.account_list:
+            if account.email == email and account.password:
+                return True
+            else:
+                return False
     def __init__(self,first_name,last_name,email,password):
 
         self.first_name = first_name

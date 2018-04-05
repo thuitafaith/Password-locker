@@ -14,6 +14,8 @@ def check_existing_accounts(email):
     return Account.account_exist(email)
 def display_accounts():
     return Account.display_accounts()
+def user_login(email,password):
+    return Account.user_login(email,password)
 
 #Functions for the profiles class
 def save_profiles(username,email,password):
@@ -30,13 +32,43 @@ def generate_password(password):
     return Profiles.generate_password()
 
 
+def Profile_():
+    while True:
+        print("Use these short codes: ca - create an account, da- display account, fa- find an account, ex- exit the account")
+
+        short_code = input().lower()
+
+        if short_code == 'ca':
+            print("New Profiles")
+
+            print("First name")
+            f_name = input()
+
+            print("Last name")
+            l_name = input()
+
+            print("email")
+            email = input()
+
+            print("Enter your password")
+            password = input()
+            save_accounts(create_account(f_name,l_name,email,password)) #create and save new account
+            print('\n')
+            print(f"New Account {f_name} {l_name} created")
+
+            print('\n')
+            #elif short_code == 'da':
+
+
+
 def main():
+    while True:
         print("Hello, welcome to the password locker. Please enter your name")
 
         user_namep = input()
         print(f"Hello {user_namep}. do you have an account? if yes login, if no sign up?yes/no")
 
-        print('\n')
+
         user_prompt = input().lower()
         if user_prompt == "no":
             print("Enter your first name")
@@ -52,12 +84,21 @@ def main():
             else:
                 new_account = create_account(first_name,last_name,email,password)
                 save_account(new_account)
+                Profile_()
 
         elif user_prompt == "yes":
             print("Enter your email")
             user_email = input()
             print("Enter your password")
             user_password = input()
+            if user_email == "" or user_password == "":
+                print("Error!please enter the empty field(s)")
+            else:
+                user_found = user_login(user_email,user_password)
+                if user_found:
+                    Profile_()
+                else:
+                    print("enter correct credentials")
         else:
             print("What are you doing")
 
@@ -88,34 +129,5 @@ def main():
 
 
 
-
-
-
-
-        while True:
-            print("Use these short codes: ca - create an account, da- display account, fa- find an account, ex- exit the account")
-
-            short_code = input().lower()
-
-            if short_code == 'ca':
-                print("New Account")
-
-                print("First name")
-                f_name = input()
-
-                print("Last name")
-                l_name = input()
-
-                print("email")
-                email = input()
-
-                print("Enter your password")
-                password = input()
-                save_accounts(create_account(f_name,l_name,email,password)) #create and save new account
-                print('\n')
-                print(f"New Account {f_name} {l_name} created")
-
-                print('\n')
-            #elif short_code == 'da':
 if __name__ == '__main__':
     main()
